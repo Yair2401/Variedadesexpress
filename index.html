@@ -1,94 +1,375 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Landing Page VariedadesExpress - Tenis Adidas Urban Comfort" />
-  <title>VariedadesExpress | Tenis Adidas Urban Comfort</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VariedadesExpress | Tenis Adidas – Landing Page</title>
+  <meta name="description" content="Landing page de VariedadesExpress: tenis cómodos, modernos y de calidad. Envíos a todo Colombia y pago contra entrega." />
+  <meta property="og:title" content="VariedadesExpress | Tenis Adidas" />
+  <meta property="og:description" content="Tenis cómodos, modernos y de calidad. Envíos a todo Colombia y pago contra entrega." />
+  <meta property="og:type" content="product" />
+  <meta property="og:image" content="https://placehold.co/1200x630/png" />
+  <meta name="theme-color" content="#0ea5e9" />
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.5; }
-    header { background:#111; color:#fff; padding:20px; text-align:center; }
-    .hero { text-align:center; padding:40px 20px; background:#f4f4f4; }
-    .hero img { max-width:300px; border-radius:10px; }
-    .price { font-size:24px; color:#e63946; font-weight:bold; }
-    .btn { display:inline-block; background:#28a745; color:#fff; padding:12px 20px; margin-top:15px; text-decoration:none; border-radius:5px; }
-    footer { background:#111; color:#fff; text-align:center; padding:15px; font-size:14px; }
-    footer a { color:#fff; margin:0 10px; text-decoration:underline; cursor:pointer; }
+    :root{
+      --bg:#0b0e14;
+      --card:#111520;
+      --muted:#6b7280;
+      --text:#e5e7eb;
+      --accent:#0ea5e9;
+      --accent-2:#22d3ee;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --shadow:0 10px 30px rgba(14,165,233,.15);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Inter,Helvetica,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(34,211,238,.12), transparent 60%),
+                  radial-gradient(900px 600px at -10% 10%, rgba(14,165,233,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92%);margin:0 auto}
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
+      background: linear-gradient(180deg, rgba(11,14,20,.85), rgba(11,14,20,.6));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow)}
+    .brand .logo span{font-weight:900;color:#06202a}
+    .navlinks{display:flex;gap:18px;font-size:.95rem;color:#cbd5e1}
 
-    /* Modales */
-    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; }
-    .modal-content { background:#fff; padding:20px; max-width:600px; width:90%; border-radius:8px; position:relative; }
-    .modal-content h2 { margin-top:0; }
-    .close { position:absolute; top:10px; right:15px; font-size:18px; cursor:pointer; }
-    .modal p { font-size:14px; color:#333; }
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:36px 0 20px}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:#0c1a22;border:1px solid rgba(34,211,238,.25);color:#a5f3fc;padding:8px 12px;border-radius:999px;font-size:.9rem}
+    h1{font-size:clamp(1.9rem,3.7vw,3rem);margin:.6rem 0 .2rem;line-height:1.1}
+    .sub{color:#cbd5e1;max-width:54ch}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .btn{padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0f172a;color:#e5e7eb;cursor:pointer;font-weight:700;letter-spacing:.2px;box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#05141a;border:none}
+    .btn.ghost{background:#0b1220}
+
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;margin:28px 0 40px}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .p24{padding:22px}
+
+    .gallery{display:grid;grid-template-columns:1fr;gap:14px}
+    .main-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#0b1220;display:grid;place-items:center}
+    .main-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .thumbs button{border:none;padding:0;background:transparent;cursor:pointer;border-radius:10px;overflow:hidden;outline:2px solid transparent}
+    .thumbs img{width:100%;height:80px;object-fit:cover;display:block}
+    .thumbs button.active{outline:2px solid var(--accent)}
+
+    .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+    .stars{display:flex;gap:2px}
+    .stars span{font-size:18px}
+    .price{display:flex;align-items:baseline;gap:12px}
+    .price .now{font-size:2rem;font-weight:900}
+    .price .old{color:#94a3b8;text-decoration:line-through}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#10212c;color:#a5f3fc;font-size:.85rem;border:1px solid rgba(34,211,238,.25)}
+
+    .sizes,.qty{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+    .sizes button{min-width:44px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#0f172a;color:#e5e7eb;cursor:pointer;font-weight:700}
+    .sizes button.active{outline:2px solid var(--accent)}
+    .qty input{width:64px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1220;color:#e5e7eb;padding:0 8px;text-align:center;font-weight:700}
+    .qty .qbtn{height:40px;width:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0f172a;color:#e5e7eb;cursor:pointer}
+
+    .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .benefits .item{background:#0d1626;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px}
+    .item small{color:#94a3b8}
+
+    .section{margin:30px 0}
+    .faq .q{background:#0f172a;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px;cursor:pointer}
+    .faq .a{display:none;padding:12px;color:#cbd5e1}
+    .faq .open .a{display:block}
+
+    footer{padding:28px 0;color:#94a3b8}
+    footer .foot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.06);padding-top:18px;margin-top:8px}
+
+    /* responsive */
+    @media (max-width: 920px){
+      .hero, .grid{grid-template-columns:1fr}
+      .benefits{grid-template-columns:1fr}
+    }
   </style>
+  <!-- Schema.org Product -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "Tenis Adidas Urban Comfort",
+    "image": [
+      "https://placehold.co/800x600/png?text=Tenis+1",
+      "https://placehold.co/800x600/png?text=Tenis+2",
+      "https://placehold.co/800x600/png?text=Tenis+3",
+      "https://placehold.co/800x600/png?text=Tenis+4"
+    ],
+    "brand": {"@type":"Brand","name":"Adidas"},
+    "description": "Tenis cómodos, modernos y de calidad. Envíos a todo Colombia y pago contra entrega.",
+    "sku": "VE-AD-001",
+    "offers": {
+      "@type": "Offer",
+      "url": "https://example.com/tenis-adidas",
+      "priceCurrency": "COP",
+      "price": "139900",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.6",
+      "reviewCount": "128"
+    }
+  }
+  </script>
 </head>
 <body>
   <header>
-    <h1>VariedadesExpress</h1>
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="Inicio VariedadesExpress">
+        <div class="logo" aria-hidden="true"><span>VE</span></div>
+        <span>VariedadesExpress</span>
+      </a>
+      <nav class="navlinks" aria-label="Secciones">
+        <a href="#envios">Envíos</a>
+        <a href="#garantia">Garantía</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Tenis Adidas Urban Comfort</h2>
-    <img src="https://placehold.co/300x300" alt="Tenis Adidas Urban Comfort" />
-    <p class="price">$139.900</p>
-    <a href="https://wa.me/573001234567?text=Hola,%20quiero%20comprar%20los%20Tenis%20Adidas%20Urban%20Comfort" class="btn">¡Comprar por WhatsApp!</a>
-  </section>
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <span class="badge">🚚 Envíos a todo Colombia · 💳 Pago contra entrega</span>
+        <h1>Tenis Adidas Urban Comfort</h1>
+        <p class="sub">Comodidad, estilo y calidad para tu día a día. Diseñados para resistir y acompañarte en cada paso.</p>
+        <div class="cta-row">
+          <a class="btn primary" id="btnWhats">Comprar por WhatsApp</a>
+          <a class="btn ghost" href="#detalles">Ver detalles</a>
+        </div>
+      </div>
+      <div class="card p24">
+        <div class="gallery" aria-label="Galería del producto">
+          <div class="main-img"><img id="mainImg" src="https://placehold.co/800x600/png?text=Tenis+1" alt="Tenis Adidas Urban Comfort" /></div>
+          <div class="thumbs">
+            <button class="active" aria-label="Vista 1"><img src="https://placehold.co/800x600/png?text=Tenis+1" alt="Vista 1" /></button>
+            <button aria-label="Vista 2"><img src="https://placehold.co/800x600/png?text=Tenis+2" alt="Vista 2" /></button>
+            <button aria-label="Vista 3"><img src="https://placehold.co/800x600/png?text=Tenis+3" alt="Vista 3" /></button>
+            <button aria-label="Vista 4"><img src="https://placehold.co/800x600/png?text=Tenis+4" alt="Vista 4" /></button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <footer>
-    <p>© 2025 VariedadesExpress</p>
-    <a id="link-privacidad">Política de Privacidad</a>
-    <a id="link-terminos">Términos y Condiciones</a>
-    <a id="link-devoluciones">Política de Devoluciones</a>
-  </footer>
+    <!-- PRODUCT GRID -->
+    <section id="detalles" class="grid">
+      <!-- LEFT: Info -->
+      <article class="card p24">
+        <div class="title-row">
+          <h2 style="margin:0">Detalles del producto</h2>
+          <div class="stars" aria-label="Calificación 4.6 de 5">
+            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+            <small style="color:#94a3b8">(128)</small>
+          </div>
+        </div>
+        <p>Los <strong>Tenis Adidas Urban Comfort</strong> combinan materiales de alta calidad con una construcción ligera para un ajuste cómodo todo el día.</p>
+        <ul>
+          <li>Diseño moderno y versátil.</li>
+          <li>Suela antideslizante con excelente tracción.</li>
+          <li>Plantilla acolchada para mayor confort.</li>
+          <li>Ideales para uso diario y outfits urbanos.</li>
+        </ul>
 
-  <!-- Modal Política de Privacidad -->
-  <div class="modal" id="modal-privacidad">
-    <div class="modal-content">
-      <span class="close" data-close="modal-privacidad">&times;</span>
-      <h2>Política de Privacidad</h2>
-      <p>En VariedadesExpress respetamos y protegemos la privacidad de nuestros clientes. Toda la información personal proporcionada será utilizada únicamente para procesar sus pedidos, coordinar envíos y mejorar su experiencia de compra. No compartimos datos con terceros sin su consentimiento previo, salvo obligación legal.</p>
-      <p>Al utilizar nuestros servicios, usted acepta esta política. Si tiene dudas, puede contactarnos a través de nuestros canales oficiales.</p>
-    </div>
-  </div>
+        <div class="benefits">
+          <div class="item"><strong>🚚 Envío rápido</strong><br><small>De 1 a 3 días hábiles.</small></div>
+          <div class="item"><strong>🔁 Cambios por talla</strong><br><small>Sin complicaciones.</small></div>
+          <div class="item"><strong>🛡️ Garantía</strong><br><small>Defectos de fábrica.</small></div>
+        </div>
+      </article>
 
-  <!-- Modal Términos y Condiciones -->
-  <div class="modal" id="modal-terminos">
-    <div class="modal-content">
-      <span class="close" data-close="modal-terminos">&times;</span>
-      <h2>Términos y Condiciones</h2>
-      <p>Bienvenido a VariedadesExpress. Al realizar una compra, usted acepta nuestras condiciones: los precios y disponibilidad pueden variar sin previo aviso; los pedidos se confirman únicamente después de recibir la confirmación por WhatsApp; y el tiempo de entrega dependerá de la ubicación del cliente.</p>
-      <p>Nos reservamos el derecho de rechazar pedidos fraudulentos o incompletos.</p>
-    </div>
-  </div>
+      <!-- RIGHT: Comprar -->
+      <aside class="card p24" aria-labelledby="comprar-title">
+        <div class="pill">🔥 Oferta limitada</div>
+        <h3 id="comprar-title" style="margin:.6rem 0 .2rem">Compra ahora</h3>
+        <div class="price" aria-label="Precio actual">
+          <span class="now" id="priceNow">$139.900</span>
+          <span class="old">$179.900</span>
+        </div>
+        <small style="color:#94a3b8">Impuestos incluidos · Precio en COP</small>
 
-  <!-- Modal Política de Devoluciones -->
-  <div class="modal" id="modal-devoluciones">
-    <div class="modal-content">
-      <span class="close" data-close="modal-devoluciones">&times;</span>
-      <h2>Política de Devoluciones</h2>
-      <p>En VariedadesExpress queremos que estés satisfecho con tu compra. Aceptamos devoluciones por defectos de fabricación dentro de los primeros 5 días hábiles después de la entrega. El producto debe estar en perfectas condiciones y con su empaque original.</p>
-      <p>Los costos de envío para devoluciones corren por cuenta del cliente, salvo que el error sea nuestro. Para iniciar el proceso, comunícate por WhatsApp con nuestro equipo de atención.</p>
-    </div>
-  </div>
+        <div class="section">
+          <label for="color" style="display:block;margin-bottom:6px;color:#cbd5e1">Color</label>
+          <select id="color" style="width:100%;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1220;color:#e5e7eb;padding:0 10px">
+            <option value="Blanco/Negro" selected>Blanco/Negro</option>
+            <option value="Negro">Negro</option>
+            <option value="Gris">Gris</option>
+          </select>
+        </div>
+
+        <div class="section">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="color:#cbd5e1">Talla</span>
+            <small id="sizeWarn" style="color:var(--danger);display:none">Selecciona tu talla</small>
+          </div>
+          <div class="sizes" role="radiogroup" aria-label="Selecciona tu talla">
+            <button data-size="38">38</button>
+            <button data-size="39">39</button>
+            <button data-size="40">40</button>
+            <button data-size="41">41</button>
+            <button data-size="42">42</button>
+            <button data-size="43">43</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <span style="color:#cbd5e1">Cantidad</span>
+          <div class="qty">
+            <button class="qbtn" id="less" aria-label="Menos">−</button>
+            <input id="qty" type="number" min="1" max="10" value="1" />
+            <button class="qbtn" id="more" aria-label="Más">+</button>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn primary" id="buyBtn">Comprar por WhatsApp</button>
+          <button class="btn" id="addFav">❤️ Agregar a favoritos</button>
+        </div>
+        <small style="display:block;margin-top:8px;color:#94a3b8">Stock: <strong>Disponible</strong> · SKU: VE-AD-001</small>
+      </aside>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card p24" id="envios">
+      <h3>Preguntas frecuentes</h3>
+      <div class="faq">
+        <div class="q" tabindex="0">
+          <strong>¿Cuánto tarda el envío?</strong>
+          <div class="a">De <strong>1 a 3 días hábiles</strong> en principales ciudades de Colombia.</div>
+        </div>
+        <div class="q" tabindex="0">
+          <strong>¿Puedo pagar contra entrega?</strong>
+          <div class="a">Sí, ofrecemos <strong>pago contra entrega</strong> en la mayoría de ciudades.</div>
+        </div>
+        <div class="q" tabindex="0" id="garantia">
+          <strong>¿Tienen garantía?</strong>
+          <div class="a">Sí, cobertura por <strong>defectos de fábrica</strong> (aplican términos).</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="card p24 section" id="contacto">
+      <h3>Contáctanos</h3>
+      <p>¿Dudas antes de comprar? Escríbenos y te ayudamos a elegir tu talla y color.</p>
+      <div class="cta-row">
+        <a class="btn primary" id="contactBtn">WhatsApp</a>
+        <a class="btn ghost" href="mailto:ventas@variedadesexpress.co">Correo</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <small>© <span id="year"></span> VariedadesExpress. Todos los derechos reservados.</small>
+        <small>Políticas de cambios · Privacidad · Términos</small>
+      </div>
+    </footer>
+  </main>
+
+  <!-- WhatsApp Floating -->
+  <a id="waFloat" aria-label="Chat por WhatsApp" style="position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:999px;background:linear-gradient(135deg,var(--ok),#16a34a);display:grid;place-items:center;color:white;font-size:26px;box-shadow:var(--shadow)" href="#">💬</a>
 
   <script>
-    const openModal = (id) => document.getElementById(id).style.display = 'flex';
-    const closeModal = (id) => document.getElementById(id).style.display = 'none';
+    // ===== Utilidades =====
+    const formatCOP = n => new Intl.NumberFormat('es-CO', {style:'currency',currency:'COP',maximumFractionDigits:0}).format(n);
 
-    document.getElementById('link-privacidad').onclick = () => openModal('modal-privacidad');
-    document.getElementById('link-terminos').onclick = () => openModal('modal-terminos');
-    document.getElementById('link-devoluciones').onclick = () => openModal('modal-devoluciones');
+    // ===== Galería =====
+    const mainImg = document.getElementById('mainImg');
+    document.querySelectorAll('.thumbs button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.thumbs button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const src = btn.querySelector('img').src;
+        mainImg.src = src;
+      })
+    })
 
-    document.querySelectorAll('.close').forEach(btn => {
-      btn.onclick = () => closeModal(btn.dataset.close);
+    // ===== Tallas =====
+    let selectedSize = null;
+    const sizeWarn = document.getElementById('sizeWarn');
+    document.querySelectorAll('.sizes button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.sizes button').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        selectedSize = b.dataset.size;
+        sizeWarn.style.display='none';
+      })
+    })
+
+    // ===== Cantidad =====
+    const qtyInput = document.getElementById('qty');
+    document.getElementById('less').onclick=()=>{ qtyInput.value = Math.max(1, +qtyInput.value-1) }
+    document.getElementById('more').onclick=()=>{ qtyInput.value = Math.min(10, +qtyInput.value+1) }
+
+    // ===== Precio dinámico (ejemplo: descuento por 2+) =====
+    const priceNow = document.getElementById('priceNow');
+    const BASE_PRICE = 139900;
+    function updatePrice(){
+      const q = +qtyInput.value || 1;
+      const total = BASE_PRICE * q * (q>=2 ? 0.95 : 1); // 5% off si lleva 2+
+      priceNow.textContent = formatCOP(total);
+    }
+    qtyInput.addEventListener('input', updatePrice);
+    document.getElementById('more').addEventListener('click', updatePrice);
+    document.getElementById('less').addEventListener('click', updatePrice);
+    updatePrice();
+
+    // ===== WhatsApp =====
+    const PHONE = '573001234567'; // ← Reemplaza por tu número con indicativo (57 + número)
+    function buildWaMessage(action){
+      const size = selectedSize ? selectedSize : '';
+      const color = document.getElementById('color').value;
+      const qty = qtyInput.value;
+      const txt = `Hola, quiero ${action === 'buy' ? 'COMPRAR' : 'información de'} los Tenis Adidas Urban Comfort%0A• Talla: ${size || '—'}%0A• Color: ${encodeURIComponent(color)}%0A• Cantidad: ${qty}%0A%0A¿Están disponibles?`;
+      return `https://wa.me/${PHONE}?text=${txt}`;
+    }
+    const buyBtn = document.getElementById('buyBtn');
+    buyBtn.addEventListener('click',()=>{
+      if(!selectedSize){ sizeWarn.style.display='inline'; window.scrollTo({top:buyBtn.offsetTop-120, behavior:'smooth'}); return; }
+      window.open(buildWaMessage('buy'),'_blank');
     });
+    document.getElementById('btnWhats').addEventListener('click',()=>{
+      window.open(buildWaMessage('info'),'_blank');
+    })
+    document.getElementById('contactBtn').addEventListener('click',()=>{
+      window.open(buildWaMessage('info'),'_blank');
+    })
+    document.getElementById('waFloat').addEventListener('click', (e)=>{
+      e.preventDefault(); window.open(buildWaMessage('info'),'_blank');
+    })
 
-    window.onclick = (e) => {
-      document.querySelectorAll('.modal').forEach(modal => {
-        if (e.target === modal) modal.style.display = 'none';
-      });
-    };
+    // ===== Favoritos (demo) =====
+    document.getElementById('addFav').addEventListener('click',()=>{
+      alert('Añadido a favoritos ✅');
+    })
+
+    // ===== FAQ =====
+    document.querySelectorAll('.faq .q').forEach(q=>{
+      q.addEventListener('click',()=> q.classList.toggle('open'))
+      q.addEventListener('keypress',(e)=>{ if(e.key==='Enter' || e.key===' '){ q.classList.toggle('open') }})
+    })
+
+    // Año footer
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
