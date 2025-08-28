@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Calzado</title>
+    <style>
+        body {font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333;}
+        header {background: #111; color: #fff; padding: 20px; text-align: center;}
+        .container {padding: 20px; max-width: 1000px; margin: auto;}
+        .gallery {display: flex; gap: 10px; margin: 20px 0;}
+        .gallery img {width: 100px; cursor: pointer; border: 2px solid transparent; border-radius: 8px;}
+        .gallery img:hover {border: 2px solid #f00;}
+        .main-img {width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px;}
+        .price {font-size: 20px; margin: 10px 0;}
+        .old-price {text-decoration: line-through; color: gray; margin-left: 10px;}
+        .stock {color: green; font-weight: bold;}
+        .btn {display: inline-block; background: red; color: #fff; padding: 12px 20px; margin: 10px 5px 0 0; text-decoration: none; border-radius: 5px; font-size: 16px;}
+        .btn:hover {background: darkred;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 Oferta Exclusiva en Tenis 🔥</h1>
+    </header>
+    <div class="container">
+        <!-- Imagen principal -->
+        <img src="tenis1.jpg" id="mainImage" class="main-img" alt="Tenis">
+
+        <!-- Galería de miniaturas -->
+        <div class="gallery">
+            <img src="tenis1.jpg" onclick="cambiarImagen('tenis1.jpg')" alt="Vista 1">
+            <img src="tenis2.jpg" onclick="cambiarImagen('tenis2.jpg')" alt="Vista 2">
+            <img src="tenis3.jpg" onclick="cambiarImagen('tenis3.jpg')" alt="Vista 3">
+        </div>
+
+        <!-- Precios y stock -->
+        <p class="price">Precio: <span style="color:red; font-size:22px;">$159.900</span><span class="old-price">$199.900</span></p>
+        <p class="stock">✅ Stock disponible</p>
+
+        <!-- Selección de talla -->
+        <label for="talla">Elige tu talla:</label>
+        <select id="talla">
+            <option value="">Selecciona</option>
+            <option>35</option>
+            <option>36</option>
+            <option>37</option>
+            <option>38</option>
+            <option>39</option>
+            <option>40</option>
+            <option>41</option>
+            <option>42</option>
+            <option>43</option>
+        </select>
+
+        <!-- Botones -->
+        <br>
+        <a href="#" class="btn" onclick="redirigirWhatsApp('carrito')">🛒 Añadir al carrito</a>
+        <a href="#" class="btn" onclick="redirigirWhatsApp('compra')">⚡ Comprar ahora</a>
+    </div>
+
+    <script>
+        // Cambiar imagen principal al hacer clic en miniatura
+        function cambiarImagen(src) {
+            document.getElementById('mainImage').src = src;
+        }
+
+        // Redirigir a WhatsApp con el mensaje personalizado
+        function redirigirWhatsApp(tipo) {
+            let talla = document.getElementById('talla').value;
+            if (!talla) {
+                alert('Por favor selecciona una talla antes de continuar');
+                return;
+            }
+            let mensaje = "Hola, quiero " + (tipo === 'carrito' ? "añadir al carrito" : "comprar ahora") + " unos tenis en talla " + talla;
+            let url = "https://wa.me/573247649763?text=" + encodeURIComponent(mensaje);
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
